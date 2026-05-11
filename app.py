@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import re
+import os
 
 # Configuration de la page pour utiliser toute la largeur de l'écran
 st.set_page_config(page_title="Dashboard Aviron", layout="wide")
@@ -11,6 +12,13 @@ st.set_page_config(page_title="Dashboard Aviron", layout="wide")
 def load_data():
     df = pd.read_csv('base_donnees_aviron_full_clean.csv', sep=';')
     
+    # On récupère la date de modification du fichier
+    # Si le fichier change sur GitHub, cette date changera et Streamlit videra le cache tout seul !
+    file_path = 'base_donnees_aviron_full_clean.csv'
+    file_stats = os.stat(file_path)
+    
+    df = pd.read_csv(file_path, sep=';')
+
     def time_to_seconds(t):
         if pd.isna(t) or type(t) != str or ':' not in t: return None
         try:
