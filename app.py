@@ -371,3 +371,16 @@ if len(filter_cat) == 1:
             st.caption(f"(Moyenne des premiers de la finale A {texte_prono})")
         else:
             st.warning("Aucun premier de FA trouvé.")
+
+# --- PIED DE PAGE / COPYRIGHT ---
+st.divider() # Ajoute une belle ligne de séparation
+
+st.markdown(
+    """
+    <div style='text-align: center; color: gray; font-size: 0.9em; padding-bottom: 20px;'>
+        © 2026 Dashboard Aviron. Tous droits réservés.<br>
+        <i>Développé par <a href="https://www.linkedin.com/in/pierre-bourgeois-655464234" target="_blank" style="color: gray;">Pierre BOURGEOIS</a></i>
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
