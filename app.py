@@ -207,10 +207,10 @@ if not top_equipes.empty:
             afficher_medaille(clubs_list[0], "#FFD700", "🥇", 0) # Pas de marge = plus haut
     if len(clubs_list) > 1:
         with col_argent:
-            afficher_medaille(clubs_list[1], "#E8E8E8", "🥈", 30) # Un peu plus bas
+            afficher_medaille(clubs_list[1], "#E8E8E8", "🥈", 0) # Un peu plus bas
     if len(clubs_list) > 2:
         with col_bronze:
-            afficher_medaille(clubs_list[2], "#CD7F32", "🥉", 60) # Le plus bas
+            afficher_medaille(clubs_list[2], "#CD7F32", "🥉", 0) # Le plus bas
 else:
     st.info("Aucun podium trouvé avec ces filtres.")
 
@@ -265,19 +265,25 @@ if len(filter_cat) == 1:
     st.markdown(f"### 📈 Analyse approfondie pour la catégorie : {cat_selectionnee}")
     
     col_gauche, col_milieu, col_droite = st.columns(3)
+    
+    # 1. On filtre sur la discipline et la catégorie (Code)
     df_cat = df_discipline[df_discipline['Code_Course'] == cat_selectionnee]
+    
+    # 2. NOUVEAU : On applique le filtre Championnat s'il a été sélectionné plus haut !
+    if 'filter_champ' in locals() and filter_champ:
+        df_cat = df_cat[df_cat['Championnat'].isin(filter_champ)]
 
     # --- En bas à gauche : Podiums ---
     with col_gauche:
         st.markdown("**Temps moyen des Podiums (FA, Pos 1 à 3)**")
         podiums = df_cat[(df_cat['Type_Finale'] == 'FA') & (df_cat['Position'] <= 3)]
         if not podiums.empty:
-            # CORRECTION : On trie bien par année pour éviter le zigzag
+            # On trie bien par année pour éviter le zigzag
             evo_podium = podiums.groupby('Année')['Temps_sec'].mean().reset_index().sort_values('Année')
             evo_podium['Temps_Affiche'] = pd.to_datetime(evo_podium['Temps_sec'], unit='s')
             
             fig1 = px.line(evo_podium, x='Année', y='Temps_Affiche', markers=True)
-            # CORRECTION : autorange="reversed" met les temps rapides en haut !
+            # autorange="reversed" met les temps rapides en haut !
             fig1.update_yaxes(tickformat="%M:%S", title_text="Temps (Min:Sec)", autorange="reversed")
             fig1.update_traces(hovertemplate="<b>Année:</b> %{x}<br><b>Temps:</b> %{y|%M:%S}<extra></extra>")
             
@@ -296,11 +302,10 @@ if len(filter_cat) == 1:
             evo_finales['Temps_Affiche'] = pd.to_datetime(evo_finales['Temps_sec'], unit='s')
             
             evo_finales['Type_Finale'] = pd.Categorical(evo_finales['Type_Finale'], categories=finales_cibles, ordered=True)
-            # CORRECTION : Le double tri (Finale PUIS Année) répare la courbe en pelote de laine
+            # Le double tri (Finale PUIS Année) répare la courbe en pelote de laine
             evo_finales = evo_finales.sort_values(['Type_Finale', 'Année'])
             
             fig2 = px.line(evo_finales, x='Année', y='Temps_Affiche', color='Type_Finale', markers=True)
-            # CORRECTION : autorange="reversed" ici aussi
             fig2.update_yaxes(tickformat="%M:%S", title_text="Temps (Min:Sec)", autorange="reversed")
             fig2.update_traces(hovertemplate="<b>Finale:</b> %{data.name}<br><b>Année:</b> %{x}<br><b>Temps:</b> %{y|%M:%S}<extra></extra>")
             
@@ -308,7 +313,7 @@ if len(filter_cat) == 1:
         else:
             st.warning("Pas assez de données pour les finales.")
 
-# --- En bas à droite : Liste Année/Temps et PRONO ---
+    # --- En bas à droite : Liste Année/Temps et PRONO ---
     with col_droite:
         st.markdown("**Meilleurs temps (1ers de FA) par année**")
         premiers_fa = df_cat[(df_cat['Type_Finale'] == 'FA') & (df_cat['Position'] == 1)]
@@ -317,11 +322,11 @@ if len(filter_cat) == 1:
             lignes_propres = []
             for annee, group in premiers_fa.groupby('Année'):
                 if len(group) > 1:
-                    # CORRECTION : On cherche un slash "/" tout court (avec ou sans espaces)
+                    # On cherche un slash "/" tout court (avec ou sans espaces)
                     group_sans_mix = group[~group['Club'].str.contains('/', na=False)]
                     
                     if not group_sans_mix.empty:
-                        # Il y a au moins un club unique ! On le garde (et on s'assure d'en garder qu'un seul)
+                        # Il y a au moins un club unique ! On le garde
                         meilleur = group_sans_mix.sort_values('Temps_sec').head(1)
                         lignes_propres.append(meilleur)
                     else:
@@ -341,7 +346,7 @@ if len(filter_cat) == 1:
             temps_prono = seconds_to_time(moyenne_historique_sec)
             
             st.error(f"### 🎯 PRONO TEMPS GAGNANT : {temps_prono}")
-            st.caption("(Moyenne historique des premiers de la finale A sur cette catégorie)")
+            st.caption("(Moyenne historique des premiers de la finale A sur cette sélection)")
         else:
             st.warning("Aucun premier de FA trouvé.")
 else:
