@@ -173,9 +173,11 @@ st.divider()
 
 # --- TOP CLUBS (Le vrai Podium Visuel) ---
 st.markdown("### 🏆 Podium des Meilleurs Clubs (sur la sélection)")
-st.caption("Si un bateau est une entente, chaque club qui le compose marque 1 podium individuellement.")
+st.caption("Si un bateau est une entente, chaque club qui le compose marque 1 podium individuellement. (Basé uniquement sur les Finales A)")
 
-top_equipes = df_filtre[df_filtre['Position'] <= 3]
+# CORRECTION : On filtre pour ne garder que les positions 1 à 3 ET les Finales A 
+# (On inclut 'F' et 'FINALE' au cas où ce soit une course à finale unique)
+top_equipes = df_filtre[(df_filtre['Type_Finale'].isin(['FA', 'F', 'FINALE'])) & (df_filtre['Position'] <= 3)]
 
 if not top_equipes.empty:
     
@@ -349,13 +351,23 @@ if len(filter_cat) == 1:
             liste_temps = premiers_fa_filtres[['Année', 'Club', 'Temps']].sort_values(by='Année', ascending=False)
             st.dataframe(liste_temps, hide_index=True, use_container_width=True)
             
-            # Pronostic : Moyenne historique du premier
-            moyenne_historique_sec = premiers_fa_filtres['Temps_sec'].mean()
+            # CORRECTION PRONO : On isole les données à partir de 2019 (inclus)
+            # On s'assure que l'année est bien considérée comme un nombre
+            premiers_fa_filtres['Année_Num'] = pd.to_numeric(premiers_fa_filtres['Année'], errors='coerce')
+            premiers_recents = premiers_fa_filtres[premiers_fa_filtres['Année_Num'] >= 2019]
+            
+            # Sécurité : Si jamais une catégorie n'a plus été courue depuis 2018, 
+            # on se rabat sur la moyenne globale pour éviter un crash
+            if not premiers_recents.empty:
+                moyenne_historique_sec = premiers_recents['Temps_sec'].mean()
+                texte_prono = "depuis 2019"
+            else:
+                moyenne_historique_sec = premiers_fa_filtres['Temps_sec'].mean()
+                texte_prono = "sur tout l'historique (pas de course depuis 2019)"
+                
             temps_prono = seconds_to_time(moyenne_historique_sec)
             
             st.error(f"### 🎯 PRONO TEMPS GAGNANT : {temps_prono}")
-            st.caption("(Moyenne historique des premiers de la finale A sur cette sélection)")
+            st.caption(f"(Moyenne des premiers de la finale A {texte_prono})")
         else:
             st.warning("Aucun premier de FA trouvé.")
-else:
-    st.info("💡 Sélectionnez **exactement une Catégorie (Code)** dans les filtres en haut pour débloquer les graphiques d'évolution et les pronostics.")

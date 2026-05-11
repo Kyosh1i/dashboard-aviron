@@ -3820,7 +3820,7 @@
 2024;SPRINTS PR;Vichy;SH2x PR Open;FA;4.0;02:28.48;Cercle Aviron de Nantes;CERCLE AVIRON DE NANTES;;;;Matthieu TALLON;Eva DAVID;;;;;;;
 2017;SPRINTS PR;Mantes-la-Jolie;SF1x LTA-ID;FA;2.0;02:29.41;Saint Nazaire Olympique Sportif Aviron;SAINT NAZAIRE OLYMPIQUE SPORTIF AVIRON;;;;Clémence DEJASSE;;;;;;;;
 2017;SPRINTS PR;Mantes-la-Jolie;SF1x Open;Finale;2.0;02:29.41;Saint Nazaire Olympique Sportif Aviron;SAINT NAZAIRE OLYMPIQUE SPORTIF AVIRON;;;;Clémence DEJASSE;;;;;;;;
-2025;BRS;Aix-Les Bains;SH1x ;FA;1.0;02:29.72;Aviron Marne et Joinville;AVIRON MARNE ET JOINVILLE;;;;Mathis NOTTELET;;;;;;;;
+2025;BRS;Aix-Les Bains;SH1x;FA;1.0;02:29.72;Aviron Marne et Joinville;AVIRON MARNE ET JOINVILLE;;;;Mathis NOTTELET;;;;;;;;
 2025;SPRINTS PR;Libourne;SH1x PR1;FA;1.0;02:29.85;Aviron Roanne-le Coteau;AVIRON ROANNE LE COTEAU;;;;Pascal DANIERE;;;;;;;;
 2022;SPRINTS PR;Vaires-sur-Marne;SH1x PR3;FA;4.0;02:30.41;Societe Havraise de l'Aviron;SOCIETE HAVRAISE DE L'AVIRON;;;;Bruno RODRIGUEZ;;;;;;;;
 2014;SPRINTS PR;Gérardmer;FS1x open;Finale;4.0;02:30.61;Sport Nautique de Nancy;SPORT NAUTIQUE DE NANCY;;;;Alexandre SCHAUT;;;;;;;;
@@ -3844,7 +3844,7 @@
 2013;SPRINTS PR;Mantes-la-Jolie;MSHTA2x;Finale;2.0;02:33.81;Nancy SN/Metz SR;SPORT NAUTIQUE DE NANCY;SOCIETE DES REGATES MESSINES;;;Franck FESTOR;Ambre SANZ;;;;;;;
 2023;BRS;Thonon les Bains;SM2x 50%H/F ;FA;1.0;02:33.895;Club Nautique de Chambery le Bourget;CLUB NAUTIQUE DE CHAMBERY LE BOURGET;;;;Juliette NEYRAT;Vincent CAVARD;;;;;;;
 2018;SPRINTS PR;Vichy;SH2x open;FA;4.0;02:34.00;Boulogne 92;BOULOGNE 92;;;;Manuel RODRIGUEZ;Patrice RENDU;;;;;;;
-2025;BRS;Aix-Les Bains;SH1x ;FA;2.0;02:34.74;Gravelines Aviron;GRAVELINES AVIRON;;;;Julien BARBEAU;;;;;;;;
+2025;BRS;Aix-Les Bains;SH1x;FA;2.0;02:34.74;Gravelines Aviron;GRAVELINES AVIRON;;;;Julien BARBEAU;;;;;;;;
 2019;SPRINTS PR;Gérardmer;SH2x Open;FA;2.0;02:34.99;Boulogne 92;BOULOGNE 92;;;;Patrice Rendu;Alexandre Duthoit;;;;;;;
 2018;FFSU;Mâcon;HU8+;FA;1.0;02:35.00;UDL Université Lyon 1 APS;UDL UNIVERSITE LYON 1 APS;;;;Nicolas STENDER;Hugo DOUSSOT;Tristan LAUTRETTE;Jean NOURY;Maxime DUCRET;Dimitri GUERACHTCHENKO;Nicolas GILBERT;Benoît DEMEY;Élisa MARTIN
 2017;SPRINTS PR;Mantes-la-Jolie;SH4Y+ LTA-ID;FA;1.0;02:35.28;Reims Reg/Charleville CN;CERCLE NAUTIQUE DES REGATES REMOISES;CLUB NAUTIQUE DE CHARLEVILLE MEZIERES;;;Fabrice AVRILLON;Joe COLLINET;Edgar VILLAIN;Eric PRIOUX;;;;;Daniel GUILLAUME
@@ -3867,7 +3867,7 @@
 2019;SPRINTS 500m;Gérardmer;SM4x 50%H/F;FE;5.0;02:38.59;Aviron Strasbourg 1881;AVIRON STRASBOURG 1881;;;;Flavie Boubault;Nicolas Braini;Louis Mathieu Kameni;Carla Durr;;;;;
 2022;BRS;La Seyne-sur-Mer;SM4x+ 50%H/50%F;FA;1.0;02:39.252;Chambery CN/Lyon AUN/la Seyne a;CLUB NAUTIQUE DE CHAMBERY LE BOURGET;AVIRON UNION NAUTIQUE DE LYON;AVIRON SEYNOIS;;Maxime DUCRET;Sandie WEBER;Vincent CAVARD;Anne-Elise COMMUNAL;;;;;Remi CHATAIGNIER
 2024;BRS;Ajaccio;SM4x+ 50%H/50%F;FA;2.0;02:39.28;Saint Nazaire SNOS/Toulouse A/Sete AV;SAINT NAZAIRE OLYMPIQUE SPORTIF AVIRON;AVIRON TOULOUSAIN;AVIRON SETOIS;;Salome DEGEORGES;Caroline LAGARDE;Nathan PUECH;Charlelie RUBIO;;;;;Enzo FRANCESCHINI
-2025;BRS;Aix-Les Bains;SH1x ;FB;1.0;02:39.44;Saint Nazaire Olympique Sportif Aviron;SAINT NAZAIRE OLYMPIQUE SPORTIF AVIRON;;;;Charlelie RUBIO;;;;;;;;
+2025;BRS;Aix-Les Bains;SH1x;FB;1.0;02:39.44;Saint Nazaire Olympique Sportif Aviron;SAINT NAZAIRE OLYMPIQUE SPORTIF AVIRON;;;;Charlelie RUBIO;;;;;;;;
 2015;SPRINTS PR;Mâcon;SH1x open PD;FA;2.0;02:39.61;Aviron Roanne-le Coteau;AVIRON ROANNE LE COTEAU;;;;Pascal DANIERE;;;;;;;;
 2016;SPRINTS PR;Gérardmer;SH1x Open;FA;1.0;02:39.77;Sport Nautique de Nancy;SPORT NAUTIQUE DE NANCY;;;;Alexandre SCHAUT;;;;;;;;
 2025;SPRINTS PR;Libourne;SH1x PR2;FA;2.0;02:39.92;Boulogne 92;BOULOGNE 92;;;;Jean-Philippe NOCQUET;;;;;;;;
@@ -3878,14 +3878,14 @@
 2023;BRS;Thonon les Bains;U19H2x;FB;1.0;02:40.827;Montauban UN/Arcachon Av;UNION NAUTIQUE MONTALBANAISE;AVIRON ARCACHONNAIS;;;Aurelien MARTIN;Romeo MOLY;;;;;;;
 2018;FFSU;Mâcon;HU8+;FA;2.0;02:40.95;Université de Savoie;UNIVERSITE DE SAVOIE;;;;Thibault STAUB;Pierre BOTERRO;Luca SCIABBARRASI;Louis DESHAIES;Clément GAIME;Vincent MARTIN;Yann CARRON;Romain GAULTHIER;Charline RENAUD
 2018;FFSU;Mâcon;HU4x;FA;1.0;02:40.96;CR Sport U Lyon;CR SPORT U LYON;;;;Paul TIXIER;Stanislas DESGRIPPES;Baptiste POINTURIER;Maxence TOLLET;;;;;
-2025;BRS;Aix-Les Bains;SH1x ;FB;2.0;02:41.15;Saint Nazaire Olympique Sportif Aviron;SAINT NAZAIRE OLYMPIQUE SPORTIF AVIRON;;;;Nathan PUECH;;;;;;;;
+2025;BRS;Aix-Les Bains;SH1x;FB;2.0;02:41.15;Saint Nazaire Olympique Sportif Aviron;SAINT NAZAIRE OLYMPIQUE SPORTIF AVIRON;;;;Nathan PUECH;;;;;;;;
 2019;SPRINTS PR;Gérardmer;SF1x PR3;FA;3.0;02:41.39;Aviron Club Orleans-Olivet;AVIRON CLUB ORLEANS OLIVET;;;;BÉATRICE Bride;;;;;;;;
 2016;SPRINTS PR;Gérardmer;SH1x Open;FA;2.0;02:41.56;Boulogne 92;BOULOGNE 92;;;;Brice MARMONNIER;;;;;;;;
 2019;SPRINTS PR;Gérardmer;SF1x PR1;Finale;1.0;02:41.80;Aviron Roanne-le Coteau;AVIRON ROANNE LE COTEAU;;;;Pascal Daniere;;;;;;;;
 2018;FFSU;Mâcon;HU8+;FA;3.0;02:41.86;ESSEC Cergy;ESSEC CERGY;;;;Théo SEBASTIEN;Adrien COSSON;Raphaël JEAN BART;Samuel KAMGA;Robin DROIN;Charles RENARD;Thomas ALARDET;Simon DEVILLERS;Camille AUDY
 2012;SPRINTS 1000m;Mâcon;SH8+;FA;1.0;02:42.26;Emulation Nautique de Bordeaux;EMULATION NAUTIQUE DE BORDEAUX;;;;Jean-Gabriel DUPEUX;Romain GARCIA;Benjamin RIPOLL;Ludovic FREROT;Yoann GUIGNET;Bastien RIPOLL;Romain BOUTRON;Damien CREBASSA;Camille MARTIN
-2025;BRS;Aix-Les Bains;SF1x ;FA;1.0;02:42.30;Societe d'Encouragement du Sport Nautique;SOCIETE D'ENCOURAGEMENT DU SPORT NAUTIQUE;;;;Helene LEFEBVRE;;;;;;;;
-2025;BRS;Aix-Les Bains;SF1x ;FA;2.0;02:42.49;Club Leo Lagrange Armentieres;CLUB LEO LAGRANGE ARMENTIERES;;;;Audrey FEUTRIE;;;;;;;;
+2025;BRS;Aix-Les Bains;SF1x;FA;1.0;02:42.30;Societe d'Encouragement du Sport Nautique;SOCIETE D'ENCOURAGEMENT DU SPORT NAUTIQUE;;;;Helene LEFEBVRE;;;;;;;;
+2025;BRS;Aix-Les Bains;SF1x;FA;2.0;02:42.49;Club Leo Lagrange Armentieres;CLUB LEO LAGRANGE ARMENTIERES;;;;Audrey FEUTRIE;;;;;;;;
 2018;FFSU;Mâcon;HU4x;FA;2.0;02:42.59;UT3 Paul Sabatier Toulouse;UT3 PAUL SABATIER TOULOUSE;;;;Nathan GIVORT;Antoine GAILLAC;Charlélie RUBIO;Hugo QUEMENER;;;;;
 2025;SPRINTS PR;Libourne;SH1x PR2;FA;3.0;02:42.80;Cercle Aviron de Nantes;CERCLE AVIRON DE NANTES;;;;Pascal SLOWINSKI;;;;;;;;
 2024;SPRINTS PR;Vichy;SH1x PR2 Open;FA;3.0;02:42.82;Cercle Aviron de Nantes;CERCLE AVIRON DE NANTES;;;;Pascal SLOWINSKI;;;;;;;;
@@ -3962,14 +3962,14 @@
 2019;FFSU;Mâcon;HU8+;FA;3.0;02:50.89;Université de Savoie;UNIVERSITE DE SAVOIE;;;;Remi Rubin Delanchy;Remy Lefranc;Louis Deshais;Robin Goffart;Hugo Gheorghiu;Thibault Staud;Emile Moiron;Romain Gaulthier;Charline Reneaud
 2021;PR;Mantes-la-Jolie;SH1x PR3-ID BC;FA;4.0;02:50.96;Association l'Avi Sourire;ASSOCIATION L'AVI SOURIRE;;;;Guillaume LATOUR;;;;;;;;
 2021;PR;Mantes-la-Jolie;SH1x PR3-ID CD;Finale;4.0;02:50.96;Association l'Avi Sourire;ASSOCIATION L'AVI SOURIRE;;;;Guillaume LATOUR;;;;;;;;
-2025;BRS;Aix-Les Bains;SF1x ;FB;1.0;02:50.99;Club d'Aviron de Mer Barneville-Carteret;CLUB D'AVIRON DE MER BARNEVILLE CARTERET;;;;Marine DELANOE;;;;;;;;
+2025;BRS;Aix-Les Bains;SF1x;FB;1.0;02:50.99;Club d'Aviron de Mer Barneville-Carteret;CLUB D'AVIRON DE MER BARNEVILLE CARTERET;;;;Marine DELANOE;;;;;;;;
 2019;FFSU;Mâcon;HU8+;FA;4.0;02:51.03;Universite Paris 2;UNIVERSITE PARIS;;;;Hugo Delfeau;Victor De Blanpre;Gislain Bohrer;Romain*m Engel;Louis De Villiers;Antoine Bolf;Quentin Brimberg;Yanis Berbarrevol;Lea Copin
 2024;FFSU;Brive-la-Gaillarde;SH8+ FFSU;FA;2.0;02:51.10;Univ Lorraine;UNIV LORRAINE;;;;Simon WARIN;Valerian SCHNEGGENBURGER;Pierre MOLINS;Arthur MOCKELS;Dorian MARQUES-VIGNERON;Valentin LOURDEZ;Quentin GEORGES;Riyadh DIAB;Alys AUBRY
 2025;FFSU;Léry-Poses;SH4x FFSU;FA;1.0;02:51.14;Universite Gustave Eiffel;UNIVERSITE GUSTAVE EIFFEL;;;;Pierre PICQUET EGLY;Mathis NOTTELET;Remi DAVAU;Antoine LEFEBVRE;;;;;
 2025;FFSU;Léry-Poses;SH4x FFSU;FA;2.0;02:51.16;Univ Lorraine;UNIV LORRAINE;;;;Arthur RIBEIRO;Pierre MOLINS;Arthur MOCKELS;Giulio MARTINS CAMPINA;;;;;
 2016;MASTERS;Mâcon;MCH4+;FA;1.0;02:51.18;Societe Nautique de l'Oise;SOCIETE NAUTIQUE DE L'OISE;;;;Sebastien COGUIC;Vincent GRAIS;Remy MAJOREK;Christophe MAJOREK;;;;;Pierre GRAIS
 2016;FFSU;Le Creusot;HU8+;FA;2.0;02:51.31;UTE Lyon 1-Sciences;UTE LYON 1 SCIENCES;;;;Vincent NOIROT;Lucas RUBAUD;Guillaume TURLAN;Quentin ANTOGNELLI;Jean NOURY;David MARTIN;Baptiste POINTURIER;Clement GAIME;Elisa MARTIN
-2025;BRS;Aix-Les Bains;SF1x ;FB;2.0;02:51.34;Ur Yoko Aviron Trainiere-Ur Yoko Arraun Elkartea;UR YOKO AVIRON TRAINIERE UR YOKO ARRAUN ELKARTEA;;;;Amaia IRAZOQUI;;;;;;;;
+2025;BRS;Aix-Les Bains;SF1x;FB;2.0;02:51.34;Ur Yoko Aviron Trainiere-Ur Yoko Arraun Elkartea;UR YOKO AVIRON TRAINIERE UR YOKO ARRAUN ELKARTEA;;;;Amaia IRAZOQUI;;;;;;;;
 2025;FFSU;Léry-Poses;SH8+ FFSU;FA;2.0;02:51.34;U Grenoble Alpes;U GRENOBLE ALPES;;;;Aurel MISTRETTA CAZZARO;Baptiste MANGE;Fabian LUDWIG;Frederic LUDWIG;Fridolin LUDWIG;Anton FOLTZER;Nathan CHIABERTO;Tobias BOUDON;Amandine SCHAFFNER
 2011;SPRINTS 1000m;Mâcon;SH8+;FB;2.0;02:51.35;Aviron Boulonnais;AVIRON BOULONNAIS;;;;Alexandre PRUVOST;Sebastien MANIER;Benoit MACQUET;Nicolas HOUTRIQUE;Yvon MALARD;Benjamin DEGROOTE;Christophe CHARLEMAGNE;Guillaume BALLIN;Elise LEFEBVRE
 2018;FFSU;Mâcon;HU8+;FB;1.0;02:51.49;ISAE Toulouse;ISAE TOULOUSE;;;;Alexis MARTIN;Robin BURATTI;Marius SERGENT;Jan ZEMAN;Maxime LEFORT;Jérémy AUCLAIR;Victor LAUFERON;Nicolas CHPILEVSKY;Charlotte POGGIALI
