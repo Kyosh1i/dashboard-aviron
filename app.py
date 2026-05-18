@@ -627,4 +627,13 @@ else:
             st.info("Aucune donnée disponible. Ajoutez des ergos manuellement ci-dessus.")
 
 # Footer
-st.markdown("<hr><div style='text-align: center; color: gray; font-size: 0.9em; padding-bottom: 20px;'>© 2026 Dashboard Aviron. Tous droits réservés.</div>", unsafe_allow_html=True)
+
+st.markdown(
+    """
+    <div style='text-align: center; color: gray; font-size: 0.9em; padding-bottom: 20px;'>
+        © 2026 Dashboard Aviron. Tous droits réservés.<br>
+        <i>Développé par <a href="https://www.linkedin.com/in/pierre-bourgeois-655464234" target="_blank" style="color: gray;">Pierre BOURGEOIS</a></i>
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
