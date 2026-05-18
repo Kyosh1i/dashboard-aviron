@@ -281,9 +281,17 @@ else:
     if filter_emb: df_cascade = df_cascade[df_cascade['Embarcation'].isin(filter_emb)]
 
     with cf4:
-        clubs_dispos = sorted(df_cascade['Club'].dropna().unique())
+        # ✅ Filtre clubs propre : Extrait les noms individuels des colonnes Club1 à Club4
+        colonnes_recherche_clubs = ['Club1', 'Club2', 'Club3', 'Club4']
+        clubs_uniques = pd.concat([df_cascade[c] for c in colonnes_recherche_clubs]).dropna().unique()
+        clubs_dispos = sorted([str(c) for c in clubs_uniques if str(c).strip() != ""])
+        
         filter_club = st.multiselect("Club", clubs_dispos)
-    if filter_club: df_cascade = df_cascade[df_cascade['Club'].isin(filter_club)]
+        
+    if filter_club: 
+        # ✅ Applique le filtre en cherchant si le club sélectionné est PRÉSENT dans Club1, 2, 3 ou 4
+        mask_club = df_cascade[colonnes_recherche_clubs].isin(filter_club).any(axis=1)
+        df_cascade = df_cascade[mask_club]
 
     with cf5:
         finales_dispos = sorted(df_cascade['Finale'].dropna().unique())
@@ -501,12 +509,10 @@ else:
                             df_ct_valid = df_ct_valid[df_ct_valid['% Prono_brut'] <= 115]
                             
                             if not df_ct_valid.empty:
-                                # On calcule le meilleur % AVANT d'appliquer les filtres visuels
                                 max_prono_absolu = df_ct_valid['% Prono_brut'].max()
                                 
                                 equipages_dispos = sorted([str(e) for e in df_ct_valid['Equipage'].unique() if pd.notna(e)])
                                 
-                                # Ajout du filtre texte pour le club/nom
                                 col_f1, col_f2 = st.columns(2)
                                 with col_f1:
                                     filtre_ct_eq = st.multiselect("Filtrer par type de bateau :", options=equipages_dispos)
@@ -517,7 +523,6 @@ else:
                                     df_ct_valid = df_ct_valid[df_ct_valid['Equipage'].isin(filtre_ct_eq)]
                                 
                                 if filtre_ct_club:
-                                    # Recherche insensible à la casse dans la colonne 'Nom'
                                     df_ct_valid = df_ct_valid[df_ct_valid['Nom'].str.contains(filtre_ct_club, case=False, na=False)]
                                 
                                 if not df_ct_valid.empty:
@@ -622,12 +627,4 @@ else:
             st.info("Aucune donnée disponible. Ajoutez des ergos manuellement ci-dessus.")
 
 # Footer
-st.markdown(
-    """
-    <div style='text-align: center; color: gray; font-size: 0.9em; padding-bottom: 20px;'>
-        © 2026 Dashboard Aviron. Tous droits réservés.<br>
-        <i>Développé par <a href="https://www.linkedin.com/in/pierre-bourgeois-655464234" target="_blank" style="color: gray;">Pierre BOURGEOIS</a></i>
-    </div>
-    """, 
-    unsafe_allow_html=True
-)
+st.markdown("<hr><div style='text-align: center; color: gray; font-size: 0.9em; padding-bottom: 20px;'>© 2026 Dashboard Aviron. Tous droits réservés.</div>", unsafe_allow_html=True)
