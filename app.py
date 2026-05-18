@@ -450,10 +450,10 @@ else:
     # ==========================================
     st.markdown("<hr style='border:none; height:1px; background:linear-gradient(90deg, rgba(200,200,200,1) 0%, rgba(200,200,200,0) 100%); margin:35px 0 15px 0;'>", unsafe_allow_html=True)
     
-    with st.expander("⏱️ Analyseur de Régate (CrewTimer)", expanded=False):
+    with st.expander("⏱️ Analyseur de Régate en direct (CrewTimer)", expanded=False):
         regatta_id = st.text_input(
             "Identifiant CrewTimer de la régate (ex: r15899). Validez avec Entrée :", 
-            placeholder="Entrez le code de la régate (trouvable dans l'URL crewtimer) et appuyez sur Entrée...", 
+            placeholder="Entrez le code de la course et appuyez sur Entrée...", 
         )
             
         if regatta_id:
@@ -501,16 +501,24 @@ else:
                             df_ct_valid = df_ct_valid[df_ct_valid['% Prono_brut'] <= 115]
                             
                             if not df_ct_valid.empty:
+                                # On calcule le meilleur % AVANT d'appliquer les filtres visuels
                                 max_prono_absolu = df_ct_valid['% Prono_brut'].max()
                                 
                                 equipages_dispos = sorted([str(e) for e in df_ct_valid['Equipage'].unique() if pd.notna(e)])
                                 
-                                col_f1, col_f2 = st.columns([1, 2])
+                                # Ajout du filtre texte pour le club/nom
+                                col_f1, col_f2 = st.columns(2)
                                 with col_f1:
                                     filtre_ct_eq = st.multiselect("Filtrer par type de bateau :", options=equipages_dispos)
+                                with col_f2:
+                                    filtre_ct_club = st.text_input("Filtrer par club / nom (ex: Bayonne) :", placeholder="Rechercher...")
                                     
                                 if filtre_ct_eq:
                                     df_ct_valid = df_ct_valid[df_ct_valid['Equipage'].isin(filtre_ct_eq)]
+                                
+                                if filtre_ct_club:
+                                    # Recherche insensible à la casse dans la colonne 'Nom'
+                                    df_ct_valid = df_ct_valid[df_ct_valid['Nom'].str.contains(filtre_ct_club, case=False, na=False)]
                                 
                                 if not df_ct_valid.empty:
                                     df_ct_valid['% Prono'] = df_ct_valid['% Prono_brut'].apply(lambda x: f"{x:.2f}%")
@@ -525,7 +533,7 @@ else:
                                     cols_finales_affichage = ['Classement', 'Equipage', 'Nom', 'Temps réalisé', 'Temps prono', '% Prono', '% Meilleur']
                                     st.dataframe(df_ct_final[cols_finales_affichage], hide_index=True, use_container_width=True)
                                 else:
-                                    st.warning("Aucun équipage ne correspond au filtre sélectionné.")
+                                    st.warning("Aucun équipage ne correspond aux filtres sélectionnés.")
                             else:
                                 st.warning("Aucun résultat valide trouvé sous la barre des 115% de pronostic.")
                         else:
@@ -540,7 +548,6 @@ else:
     # ==========================================
     with st.expander("💪 Calculateur Moyenne ergométrique", expanded=False):
         
-        # Le callback : fonction qui s'exécute AVANT le rechargement visuel de la page
         def process_custom_ergo():
             nom = st.session_state.get('custom_nom', '')
             m = st.session_state.get('custom_m', 0)
@@ -555,12 +562,10 @@ else:
                     'date': "Ajout manuel"
                 }
                 
-                # RÉASSIGNATION COMPLÈTE DE LA LISTE : Oblige Streamlit à voir la modification
                 selection_actuelle = st.session_state.get("boat_selection", [])
                 if nom_propre not in selection_actuelle:
                     st.session_state.boat_selection = selection_actuelle + [nom_propre]
                     
-                # On vide les champs du formulaire proprement
                 st.session_state.custom_nom = ""
                 st.session_state.custom_m = 0
                 st.session_state.custom_s = 0
@@ -578,7 +583,6 @@ else:
         with col_cent:
             st.number_input("Cent", min_value=0, max_value=99, step=1, label_visibility="collapsed", key="custom_cent")
         with col_btn:
-            # L'attribut on_click lie le bouton au callback défini plus haut
             st.button("Valider / Ajouter", on_click=process_custom_ergo, use_container_width=True)
             
         st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
@@ -589,18 +593,16 @@ else:
         if not df_ergo_full.empty:
             df_ergo_recent = df_ergo_full.sort_values(by='Date test', ascending=False).drop_duplicates(subset=['Nom Prénom'])
             maintenant = pd.Timestamp.now()
-            date_ref = maintenant if df_ergo_recent['Date test'].max() >= (maintenant - pd.DateOffset(years=2)) else df_ergo_recent['Date test'].max()
-            df_ergo_valide = df_ergo_recent[df_ergo_recent['Date test'] >= (date_ref - pd.DateOffset(years=2))]
+            date_ref = maintenant if df_ergo_recent['Date test'].max() >= (maintenant - pd.DateOffset(years=1)) else df_ergo_recent['Date test'].max()
+            df_ergo_valide = df_ergo_recent[df_ergo_recent['Date test'] >= (date_ref - pd.DateOffset(years=1))]
             
             dict_ergo_calc = {row['Nom Prénom']: {'temps': row['Temps_sec'], 'date': row['Date test'].strftime('%d/%m/%Y')} for _, row in df_ergo_valide.iterrows()}
         
-        # Injection des ergos manuels en mémoire dans les choix possibles
         dict_ergo_calc.update(st.session_state.custom_ergos)
         
         if dict_ergo_calc:
             noms_dispos = sorted(list(dict_ergo_calc.keys()))
             
-            # La clé 'boat_selection' permet au filtre de se synchroniser avec notre callback !
             selection_equipage = st.multiselect(
                 "Sélectionnez les rameurs pour composer votre bateau :", 
                 options=noms_dispos, 
@@ -620,7 +622,6 @@ else:
             st.info("Aucune donnée disponible. Ajoutez des ergos manuellement ci-dessus.")
 
 # Footer
-
 st.markdown(
     """
     <div style='text-align: center; color: gray; font-size: 0.9em; padding-bottom: 20px;'>
