@@ -9,7 +9,7 @@ import datetime
 fichier_entree = "base_donnees_aviron.csv"
 fichier_sortie = "base_donnees_aviron_enrichie.csv"
 fichier_dict_clubs = "dictionnaire_clubs.json"
-fichier_dict_noms_ergo = "dictionnaire_noms_ergo.json" # <-- NOUVEAU DICTIONNAIRE MÉMOIRE
+fichier_dict_noms_ergo = "dictionnaire_noms_ergo.json" 
 fichier_ergo = "donnees_ergo.csv" 
 fichier_log_ergo = "lissage_noms_ergo_log.txt"
 
@@ -18,14 +18,16 @@ fichier_log_ergo = "lissage_noms_ergo_log.txt"
 # ==========================================
 print(f"Chargement du fichier brut : {fichier_entree}...")
 try:
-    df_brut = pd.read_csv(fichier_entree, sep=';', encoding='utf-8-sig')
+    # Ajout de low_memory=False pour éviter les DtypeWarnings
+    df_brut = pd.read_csv(fichier_entree, sep=';', encoding='utf-8-sig', low_memory=False)
 except FileNotFoundError:
     print(f"❌ Erreur : Le fichier {fichier_entree} n'a pas été trouvé.")
     exit()
 
 # Logique Incrémentale : On compare UNIQUEMENT Championnat + Année
 if os.path.exists(fichier_sortie):
-    df_existant = pd.read_csv(fichier_sortie, sep=';', encoding='utf-8-sig')
+    # Ajout de low_memory=False ici aussi
+    df_existant = pd.read_csv(fichier_sortie, sep=';', encoding='utf-8-sig', low_memory=False)
     
     cles_existantes = set(zip(
         df_existant['Championnat'].astype(str).str.strip(), 
@@ -79,7 +81,10 @@ encodage_erreurs = {
 }
 for erreur, correction in encodage_erreurs.items():
     df.columns = df.columns.str.replace(erreur, correction, regex=False)
-text_cols = df.select_dtypes(include=['object', 'str']).columns
+
+# CORRECTION DU BUG GITHUB ACTIONS : Remplacement de 'str' par 'string'
+text_cols = df.select_dtypes(include=['object', 'string']).columns
+
 for col in text_cols:
     for erreur, correction in encodage_erreurs.items():
         df[col] = df[col].str.replace(erreur, correction, regex=False)
@@ -309,7 +314,6 @@ if os.path.exists(fichier_ergo):
     
     df_ergo_clean = df_ergo.dropna(subset=['Saison', 'Temps_sec', 'Nom Prénom']).groupby(['Nom Prénom', 'Saison'])['Temps_sec'].min().reset_index()
 
-    # Chargement du dictionnaire mémoire s'il existe
     dict_noms_ergo = {}
     if os.path.exists(fichier_dict_noms_ergo):
         try:
@@ -328,12 +332,10 @@ if os.path.exists(fichier_ergo):
     
     print(f"   -> Lissage des noms Ergo ({len(nouveaux_noms_ergo)} nouveaux noms à calculer)...")
     
-    # Remplissage depuis la mémoire
     for nom_e in noms_ergo:
         if nom_e in dict_noms_ergo:
             match_ergo_eau[nom_e] = dict_noms_ergo[nom_e]
             
-    # Calcul des nouveaux (Fuzzy lent uniquement sur la nouveauté)
     if nouveaux_noms_ergo:
         for nom_e in nouveaux_noms_ergo:
             meilleur_match = process.extractOne(nom_e, noms_eau, scorer=fuzz.token_sort_ratio, score_cutoff=95)
@@ -343,7 +345,6 @@ if os.path.exists(fichier_ergo):
                 match_ergo_eau[nom_e] = nom_officiel
                 logs_ergo.append(f"[{meilleur_match[1]}%] ERGO: '{nom_e}'  =>  OFFICIEL: '{nom_officiel}'")
                 
-        # Sauvegarde de la mémoire mise à jour
         with open(fichier_dict_noms_ergo, "w", encoding="utf-8") as f:
             json.dump(dict_noms_ergo, f, indent=4, ensure_ascii=False)
             
@@ -433,10 +434,8 @@ ordre_attendu = [
 
 df = df[[c for c in ordre_attendu if c in df.columns]]
 
-# Concaténation avec l'existant
 if not df_existant.empty:
     df_final = pd.concat([df_existant, df], ignore_index=True)
-    # Tri propre global
     df_final = df_final.sort_values(by=["Année", "Championnat", "Code_Course", "Finale", "Position"], ascending=[False, True, True, True, True])
 else:
     df_final = df
