@@ -2,10 +2,12 @@ name: Mise à jour hebdomadaire Aviron
 
 on:
   schedule:
-    # 23:59 tous les dimanches (Heure UTC, donc 00:59 ou 01:59 en France selon l'heure d'hiver/été)
     - cron: '59 23 * * 0' 
-  workflow_dispatch: # Permet d'avoir un bouton "Run workflow" sur GitHub pour le tester manuellement !
-
+  workflow_dispatch: 
+  
+permissions:
+  contents: write
+  
 jobs:
   update-data:
     runs-on: ubuntu-latest
